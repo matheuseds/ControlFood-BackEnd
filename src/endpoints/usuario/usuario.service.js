@@ -3,7 +3,7 @@ const models = require("../../database/models");
 class UsuarioService {
   async findAll() {}
 
-  async create({ body }) {
+  async create(req) {
     await models.Usuario.create(body);
 
     return {

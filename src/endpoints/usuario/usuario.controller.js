@@ -1,9 +1,10 @@
 const express = require("express");
+const UsuarioService = require("./usuario.service");
 
 class UsuarioController {
   async findAll(req, res) {
     try {
-      const result = await this.service.findAll();
+      const result = await UsuarioService.findAll();
       return res.status(200).json(result);
     } catch (error) {
       return res.status(500).json({ error: { message: error.message } });
@@ -12,7 +13,7 @@ class UsuarioController {
 
   async findById(req, res) {
     try {
-      const result = await this.service.findById(req);
+      const result = await UsuarioService.findById(req);
       return res.status(200).json(result);
     } catch (error) {
       return res.status(500).json({ error: { message: error.message } });
@@ -21,7 +22,7 @@ class UsuarioController {
 
   async update(req, res) {
     try {
-      const result = await this.service.update(req);
+      const result = await UsuarioService.update(req);
       return res.status(200).json(result);
     } catch (error) {
       return res.status(500).json({ error: { message: error.message } });
@@ -30,7 +31,7 @@ class UsuarioController {
 
   async create(req, res) {
     try {
-      const result = await this.service.create();
+      const result = await UsuarioService.create(req);
       return res.status(200).json(result);
     } catch (error) {
       return res.status(500).json({ error: { message: error.message } });
@@ -39,7 +40,7 @@ class UsuarioController {
 
   async remove(req, res) {
     try {
-      const result = await this.service.remove(req);
+      const result = await UsuarioService.remove(req);
       return res.status(200).json(result);
     } catch (error) {
       return res.status(500).json({ error: { message: error.message } });
