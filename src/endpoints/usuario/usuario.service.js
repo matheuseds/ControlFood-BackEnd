@@ -4,7 +4,7 @@ class UsuarioService {
   async findAll() {}
 
   async create(req) {
-    await models.Usuario.create(body);
+    await models.Usuario.create(req.body);
 
     return {
       status: 201,
