@@ -16,12 +16,12 @@ app.use((req, res, next) => {
 
 class App {
   constructor() {
-    this.server = express();
+    this.server = Express();
     this.middlewares();
     this.routes();
   }
   middlewares() {
-    this.server.use(express.json());
+    this.server.use(Express.json());
   }
   routes() {
     this.server.use(Routes);
