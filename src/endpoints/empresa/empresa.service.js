@@ -8,7 +8,7 @@ class EmpresaService {
 
     return {
       status: 201,
-      message: "Empresa cadastrado com sucesso!",
+      message: "Empresa cadastrada com sucesso!",
     };
   }
 
