@@ -15,16 +15,16 @@ module.exports = {
           cnpj: {
             type: Sequelize.STRING,
           },
-          nomeEmpresa: {
+          nome_empresa: {
             type: Sequelize.STRING,
           },
           email: {
             type: Sequelize.STRING,
           },
-          nomeResponsavel: {
+          nome_responsavel: {
             type: Sequelize.STRING,
           },
-          contatoResponsavel: {
+          contato_responsavel: {
             type: Sequelize.STRING,
           },
           endereco: {
@@ -39,12 +39,12 @@ module.exports = {
           cep: {
             type: Sequelize.STRING,
           },
-          createdAt: {
+          created_at: {
             allowNull: false,
             type: Sequelize.DATE,
             defaultValue: Sequelize.fn("now"),
           },
-          updatedAt: {
+          updated_at: {
             allowNull: false,
             type: Sequelize.DATE,
             defaultValue: Sequelize.fn("now"),
