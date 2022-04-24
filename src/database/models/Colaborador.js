@@ -1,8 +1,8 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../index");
 
-const Usuario = sequelize.define(
-  "Usuario",
+const Colaborador = sequelize.define(
+  "Colaborador",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -13,20 +13,24 @@ const Usuario = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    nome_empresa: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    senha: {
+    numero_matricula: {
       type: DataTypes.STRING,
       allowNull: false,
     },
   },
   {
     underscored: true,
-    tableName: "usuario",
+    tableName: "colaborador",
     timestamps: true,
   }
 );
 
-module.exports = Usuario;
+module.exports = Colaborador;
