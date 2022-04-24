@@ -13,6 +13,10 @@ const Colaborador = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    cpf: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     nome_empresa: {
       type: DataTypes.STRING,
       allowNull: false,
