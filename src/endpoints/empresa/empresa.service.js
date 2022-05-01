@@ -1,7 +1,9 @@
 const models = require("../../database/models");
 
 class EmpresaService {
-  async findAll() {}
+  async findAll() {
+    return models.Empresa.findAll()
+  }
 
   async create(req) {
     await models.Empresa.create(req.body);

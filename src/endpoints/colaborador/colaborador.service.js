@@ -1,7 +1,9 @@
 const models = require("../../database/models");
 
 class ColaboradorService {
-  async findAll() {}
+  async findAll() {
+    return models.Colaborador.findAll()
+  }
 
   async create(req) {
     await models.Colaborador.create(req.body);
