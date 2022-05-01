@@ -4,7 +4,7 @@ const UsuarioService = require("./usuario.service");
 class UsuarioController {
   async findAll(req, res) {
     try {
-      const result = await UsuarioService.findAll();
+      const result = await UsuarioService.findAll(req);
       return res.status(200).json(result);
     } catch (error) {
       return res.status(500).json({ error: { message: error.message } });
@@ -50,7 +50,7 @@ class UsuarioController {
   createRouter() {
     const router = express.Router();
 
-    router.get("/", (req, res) => {
+    router.post("/login", (req, res) => {
       this.findAll(req, res);
     });
 
