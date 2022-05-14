@@ -32,7 +32,16 @@ class UsuarioController {
   async create(req, res) {
     try {
       const result = await UsuarioService.create(req);
-      return res.status(200).json(result);
+      return res.status(result.status).json(result);
+    } catch (error) {
+      return res.status(500).json({ error: { message: error.message } });
+    }
+  }
+
+  async login(req, res) {
+    try {
+      const result = await UsuarioService.login(req);
+      return res.status(result.status).json(result);
     } catch (error) {
       return res.status(500).json({ error: { message: error.message } });
     }
@@ -51,7 +60,7 @@ class UsuarioController {
     const router = express.Router();
 
     router.post("/login", (req, res) => {
-      this.findAll(req, res);
+      this.login(req, res);
     });
 
     router.get("/:id", (req, res) => {
