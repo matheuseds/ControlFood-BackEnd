@@ -23,7 +23,16 @@ class EmpresaService {
   }
 
   async remove(req) {
-    console.log(req);
+    const { id } = req.params
+    await models.Empresa.destroy({
+      where: {
+        id
+      }
+    });
+    return {
+      status: 200,
+      message: "Empresa excluida com sucesso!",
+    };
   }
 }
 
