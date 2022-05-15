@@ -15,7 +15,14 @@ class EmpresaService {
   }
 
   async update(req) {
-    console.log(req);
+    await models.Empresa.update(req.body, {
+      where: { id: req.params.id },
+    });
+
+    return {
+      status: 200,
+      message: "Empresa atualizada com sucesso!",
+    } ;
   }
 
   async findById(req) {

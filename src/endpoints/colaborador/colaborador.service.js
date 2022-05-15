@@ -15,7 +15,14 @@ class ColaboradorService {
   }
 
   async update(req) {
-    console.log(req);
+    await models.Colaborador.update(req.body, {
+      where: { id: req.params.id },
+    });
+
+    return {
+      status: 200,
+      message: "Colaborador atualizado com sucesso!",
+    };
   }
 
   async findById(req) {
@@ -23,7 +30,16 @@ class ColaboradorService {
   }
 
   async remove(req) {
-    console.log(req);
+    const { id } = req.params
+    await models.Colaborador.destroy({
+      where: {
+        id
+      }
+    });
+    return {
+      status: 200,
+      message: "Colaborador excluido com sucesso!",
+    };
   }
 }
 
