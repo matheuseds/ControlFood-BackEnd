@@ -39,20 +39,4 @@ function validaSenha(senha) {
     return /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/.test(senha)
 }
 
-function padraoErro(mensagem) {
-    return {
-        status: 400,
-        message: mensagem,
-        result: null
-    }
-}
-
-function padraoSucesso(dado) {
-    return {
-        status: 200,
-        message: "ok",
-        result: dado
-    }
-}
-
 module.exports = {SegurancaUser,EncriptaSenha, VerificaJwt, Encripta, validaSenha, comparehash}
