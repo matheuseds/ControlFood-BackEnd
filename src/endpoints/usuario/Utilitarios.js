@@ -11,6 +11,10 @@ function SegurancaUser(iduser) {
     }
 }
 
+async function EncriptaCpf(cpf){
+    return bcryptjs.hash(cpf, 14)
+}
+
  async function EncriptaSenha(senha) {
    return bcryptjs.hash(senha, 8)
 }
@@ -40,3 +44,4 @@ function validaSenha(senha) {
 }
 
 module.exports = {SegurancaUser,EncriptaSenha, VerificaJwt, Encripta, validaSenha, comparehash}
+
