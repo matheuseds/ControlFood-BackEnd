@@ -25,10 +25,7 @@ const Colaborador = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    numero_matricula: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
+    
   },
   {
     underscored: true,
