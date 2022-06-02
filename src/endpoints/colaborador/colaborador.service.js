@@ -1,12 +1,18 @@
+const req = require("express/lib/request");
 const models = require("../../database/models");
+const utilitarios = require("../usuario/Utilitarios");
 
 class ColaboradorService {
   async findAll() {
-    return models.Colaborador.findAll()
+    let lista = await models.Colaborador.findAll();
+
+    return lista;
   }
 
   async create(req) {
-    await models.Colaborador.create(req.body);
+    const cpf = utilitarios.Encripta(req.body.cpf);
+
+    await models.Colaborador.create({ ...req.body, cpf });
 
     return {
       status: 201,
@@ -30,11 +36,11 @@ class ColaboradorService {
   }
 
   async remove(req) {
-    const { id } = req.params
+    const { id } = req.params;
     await models.Colaborador.destroy({
       where: {
-        id
-      }
+        id,
+      },
     });
     return {
       status: 200,

@@ -25,7 +25,10 @@ const Colaborador = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
   },
   {
     underscored: true,
@@ -33,5 +36,12 @@ const Colaborador = sequelize.define(
     timestamps: true,
   }
 );
+
+Colaborador.associate = ({ Usuario }) => {
+  Colaborador.hasOne(Usuario, {
+    foreignKey: "user_id",
+    as: "Usuario",
+  });
+};
 
 module.exports = Colaborador;

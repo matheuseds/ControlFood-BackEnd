@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../index");
 
-const Usuario = sequelize.define(
+const Empresa = sequelize.define(
   "Empresa",
   {
     id: {
@@ -48,6 +48,10 @@ const Usuario = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
   },
   {
     underscored: true,
@@ -56,4 +60,11 @@ const Usuario = sequelize.define(
   }
 );
 
-module.exports = Usuario;
+Empresa.associate = ({ Usuario }) => {
+  Empresa.hasOne(Usuario, {
+    foreignKey: "user_id",
+    as: "usuario",
+  });
+};
+
+module.exports = Empresa;
