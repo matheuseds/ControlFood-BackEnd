@@ -37,11 +37,6 @@ const Colaborador = sequelize.define(
   }
 );
 
-Colaborador.associate = ({ Usuario }) => {
-  Colaborador.hasOne(Usuario, {
-    foreignKey: "user_id",
-    as: "Usuario",
-  });
-};
+
 
 module.exports = Colaborador;

@@ -56,7 +56,7 @@ class EmpresaController {
     });
 
     router.get("/:id", (req, res) => {
-      this.findAllById(req, res);
+      this.findById(req, res);
     });
 
     router.put("/:id", (req, res) => {

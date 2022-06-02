@@ -60,11 +60,6 @@ const Empresa = sequelize.define(
   }
 );
 
-Empresa.associate = ({ Usuario }) => {
-  Empresa.hasOne(Usuario, {
-    foreignKey: "user_id",
-    as: "usuario",
-  });
-};
+
 
 module.exports = Empresa;
