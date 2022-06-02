@@ -41,6 +41,7 @@ class UsuarioService {
       status: 200,
       message: "Usuário logado",
       token,
+      id: user.id
     };
   }
 
