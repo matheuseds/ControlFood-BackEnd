@@ -1,12 +1,16 @@
+const req = require("express/lib/request");
 const models = require("../../database/models");
+const Utilitarios = require("../usuario/Utilitarios");
 
 class EmpresaService {
   async findAll() {
-    return models.Empresa.findAll()
+    return models.Empresa.findAll();
   }
 
   async create(req) {
-    await models.Empresa.create(req.body);
+    const cnpj = Utilitarios.Encripta(req.body.cnpj);
+
+    await models.Empresa.create({ ...req.body, cnpj });
 
     return {
       status: 201,
@@ -22,7 +26,7 @@ class EmpresaService {
     return {
       status: 200,
       message: "Empresa atualizada com sucesso!",
-    } ;
+    };
   }
 
   async findById(req) {
@@ -30,11 +34,11 @@ class EmpresaService {
   }
 
   async remove(req) {
-    const { id } = req.params
+    const { id } = req.params;
     await models.Empresa.destroy({
       where: {
-        id
-      }
+        id,
+      },
     });
     return {
       status: 200,
