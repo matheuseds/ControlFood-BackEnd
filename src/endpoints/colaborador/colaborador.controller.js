@@ -32,7 +32,7 @@ class ColaboradorController {
   async create(req, res) {
     try {
       const result = await ColaboradorService.create(req);
-      return res.status(200).json(result);
+      return res.status(result.status).json(result);
     } catch (error) {
       console.log(error);
       return res.status(500).json({ error: { message: error.message } });
