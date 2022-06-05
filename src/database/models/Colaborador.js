@@ -29,6 +29,10 @@ const Colaborador = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: true,
     },
+    qtdref: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
   },
   {
     underscored: true,
