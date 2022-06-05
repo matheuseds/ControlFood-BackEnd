@@ -33,10 +33,10 @@ class ColaboradorService {
 
   async addref(req) {
     const id = req.body.id;
-    
+
     let qtdref = await models.Colaborador.findOne({ where: { id } });
-    (qtdref = qtdref.qtdref + 1),
-      await models.Colaborador.update({ qtdref }, { where: { id } });
+    qtdref = qtdref.qtdref + 1
+    await models.Colaborador.update({ qtdref }, { where: { id } });
 
     return {
       status: 200,
