@@ -39,6 +39,16 @@ class ColaboradorController {
     }
   }
 
+  async addref(req, res) {
+    try {
+      const result = await ColaboradorService.addref(req);
+      return res.status(200).json(result);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ error: { message: error.message } });
+    }
+  }
+
   async remove(req, res) {
     try {
       const result = await ColaboradorService.remove(req);
@@ -61,6 +71,10 @@ class ColaboradorController {
 
     router.put("/:id", (req, res) => {
       this.update(req, res);
+    });
+
+    router.post("/addref", (req, res) => {
+      this.addref(req, res);
     });
 
     router.post("/", (req, res) => {
