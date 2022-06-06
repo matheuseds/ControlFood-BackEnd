@@ -51,27 +51,23 @@ class UsuarioService {
   }
 
   async create(req) {
-    let email = Globals.ValidaEmail(req.body.email);
-    let senha = Globals.ValidaSenha(req.body.senha);
+    let emailEValido = Globals.validaEmail(req.body.email);
+    let senhaEValida = Globals.validaSenha(req.body.senha);
 
-    if (!email && !senha) {
+    if (!emailEValido || !senhaEValida) {
       return {
-        status: 403,
+        status: 400,
         message: "Dados Inválidos",
       };
     }
 
-    senha = await Globals.EncriptaSenha(senha);
+    const senhaEncriptada = await Globals.EncriptaSenha(req.body.senha);
 
-    const user = await models.Usuario.create({ ...req.body, senha, });
+    const user = await models.Usuario.create({
+      ...req.body,
+      senha: senhaEncriptada,
+    });
     const token = Globals.SegurancaUser(user.id);
-
-    if (!Globals.validaSenha(req.body.senha)) {
-      return {
-        status: 422,
-        message: "Senha inválida",
-      };
-    }
 
     return {
       status: 201,

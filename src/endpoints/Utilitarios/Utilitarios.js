@@ -122,31 +122,8 @@ function validaCnpj(cnpj) {
 }
 
 function validaEmail(email) {
-    if (email != undefined) {
-        let valida = new Object()
-        valida.email = email
-        valida.arroba = email.split("@")
-        valida.ponto = email.split(".")
-        valida.tamanho = valida.email.length
-        valida.arrobaTam = valida.arroba.length
-        valida.pontoTam = valida.ponto.length
-        valida.teste = valida.arroba[0].length
-        for (let i = 0; i < valida.tamanho; i++) {
-            if (valida.email[i] == '@' && valida.arrobaTam !== 1 && valida.pontoTam !== 1 && valida.tamanho > 11 && valida.arroba[0].length >= 6) {
-                for (let i = 0; i < valida.pontoTam; i++) {
-                    if (valida.ponto[i] == "com") {
-                        valida.status = 200
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-    return false;
+    return /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi.test(email)
 }
-
-
 
 module.exports = {SegurancaUser,EncriptaSenha, VerificaJwt, Encripta, validaSenha, comparehash, enviaremail, validaEmail, validaCnpj, validaCpf}
 
