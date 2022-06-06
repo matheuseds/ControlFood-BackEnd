@@ -1,5 +1,5 @@
 const models = require("../../database/models");
-const Globals = require("./Utilitarios");
+const Globals = require("../Utilitarios/Utilitarios");
 
 class UsuarioService {
   async findAll(req) {
@@ -20,6 +20,8 @@ class UsuarioService {
   async login(req) {
     const email = req.body.email;
     const senha = req.body.senha;
+
+    //let nome = "";
     let user = await models.Usuario.findOne({ where: { email } });
     if (!user) {
       return {
@@ -31,34 +33,41 @@ class UsuarioService {
     if (!isValid) {
       return {
         status: 404,
-        message: "Usuário não encontrado",
+        message: "Usuário não encontrado 12",
       };
     }
 
     const token = Globals.Encripta({ id: user.id });
+    let mensagem = "Utilize este token para fazer seu login";
+    await Globals.enviaremail(email, user.nome, `${mensagem}: ${token}`);
 
     return {
       status: 200,
       message: "Usuário logado",
-      token,
-      id: user.id
+      //token,
+      // id: token,
+      //id: user.id
     };
   }
 
   async create(req) {
-    const cnpj = Globals.Encripta(req.body.cnpj);
-    const cpf = Globals.Encripta(req.body.cpf);
-    const senha = await Globals.EncriptaSenha(req.body.senha);
+    let emailEValido = Globals.validaEmail(req.body.email);
+    let senhaEValida = Globals.validaSenha(req.body.senha);
 
-    const user = await models.Usuario.create({ ...req.body, senha, cpf, cnpj });
-    const token = Globals.SegurancaUser(user.id);
-
-    if (!Globals.validaSenha(req.body.senha)) {
+    if (!emailEValido || !senhaEValida) {
       return {
-        status: 422,
-        message: "Senha inválida",
+        status: 400,
+        message: "Dados Inválidos",
       };
     }
+
+    const senhaEncriptada = await Globals.EncriptaSenha(req.body.senha);
+
+    const user = await models.Usuario.create({
+      ...req.body,
+      senha: senhaEncriptada,
+    });
+    const token = Globals.SegurancaUser(user.id);
 
     return {
       status: 201,

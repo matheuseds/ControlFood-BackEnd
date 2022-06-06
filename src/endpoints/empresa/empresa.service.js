@@ -1,6 +1,6 @@
 const req = require("express/lib/request");
 const models = require("../../database/models");
-const Utilitarios = require("../usuario/Utilitarios");
+const Utilitarios = require("../Utilitarios/Utilitarios");
 
 class EmpresaService {
   async findAll() {
@@ -8,7 +8,16 @@ class EmpresaService {
   }
 
   async create(req) {
-    const cnpj = Utilitarios.Encripta(req.body.cnpj);
+    let cnpj = Globals.ValidaCnpj(req.body.cnpj);
+
+    if (!cnpj) {
+      return {
+        status: 403,
+        message: "Dados Inválidos",
+      };
+    }
+
+    cnpj = Utilitarios.Encripta(req.body.cnpj);
 
     await models.Empresa.create({ ...req.body, cnpj });
 

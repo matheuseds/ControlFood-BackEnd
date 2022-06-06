@@ -1,18 +1,35 @@
 const req = require("express/lib/request");
 const models = require("../../database/models");
-const utilitarios = require("../usuario/Utilitarios");
+const Globals = require("../Utilitarios/Utilitarios");
 
 class ColaboradorService {
   async findAll() {
     let lista = await models.Colaborador.findAll();
+    console.log(lista)
 
     return lista;
   }
 
   async create(req) {
-    const cpf = utilitarios.Encripta(req.body.cpf);
+    let cpf = req.body.cpf;
+    let user_id = Globals.VerificaJwt(req.body.user_id);
+    let isFormatado = cpf.includes(".");
 
-    await models.Colaborador.create({ ...req.body, cpf });
+    if (isFormatado) {
+      cpf = cpf.replaceAll(".", "");
+      cpf = cpf.replaceAll("-", "");
+    }
+    let isValed = Globals.validaCpf(cpf);
+    if (!isValed) {
+      return {
+        status: 203,
+        message: "CPF Inválido",
+      };
+    }
+
+    cpf = Globals.Encripta(req.body.cpf);
+
+    await models.Colaborador.create({ ...req.body, cpf, user_id });
 
     return {
       status: 201,
