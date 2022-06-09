@@ -8,7 +8,7 @@ class EmpresaService {
   }
 
   async create(req) {
-    let cnpj = Globals.ValidaCnpj(req.body.cnpj);
+    let cnpj = Utilitarios.validaCnpj(req.body.cnpj);
 
     if (!cnpj) {
       return {
