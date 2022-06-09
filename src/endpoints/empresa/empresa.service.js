@@ -51,7 +51,7 @@ class EmpresaService {
     });
     return {
       status: 200,
-      message: "Empresa excluida com sucesso!",
+      message: "Empresa excluída com sucesso!",
     };
   }
 }

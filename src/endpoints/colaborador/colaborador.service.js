@@ -74,7 +74,7 @@ class ColaboradorService {
     });
     return {
       status: 200,
-      message: "Colaborador excluido com sucesso!",
+      message: "Colaborador excluído com sucesso!",
     };
   }
 }
